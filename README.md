@@ -14,7 +14,7 @@ It takes 2 variables: `USER` and `PASSWORD`, both in cleartext. Redirect the TCP
     -p 2222:22 \
     -e USER=myusername \
     -e PASSWORD=mypassword \
-    sjourdan/alpine-sshd
+    quay.io/realeyes/alpine-sftp
 
 Then you can use this container to SFTP and/or SSH:
 
