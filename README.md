@@ -8,12 +8,14 @@ The intended usage is to (temporary) access/modify shared volumes by SSH/SFTP.
 
 ## Usage
 
-It takes 2 variables: `USER` and `PASSWORD`, both in cleartext. Redirect the TCP/22 port to whatever port you want.
+It takes 4 variables: 'USER', 'PASSWORD', 'SETGID', 'SETUID' all in cleartext. Redirect the TCP/22 port to whatever port you want. Example
 
     docker run -d \
     -p 2222:22 \
     -e USER=myusername \
     -e PASSWORD=mypassword \
+    -e SETUID=1008 \
+    -e SETGID=1009 \
     quay.io/realeyes/alpine-sftp
 
 Then you can use this container to SFTP and/or SSH:
