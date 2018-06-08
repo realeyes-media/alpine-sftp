@@ -12,9 +12,21 @@ if [ -z "$PASSWORD" ]; then
   exit 1
 fi
 
+# Checks for SETUID variable
+if [ -z "$SETUID" ]; then
+  echo >&2 'Please set a SETUID variable (ie.: -e SETUID=1007).'
+  exit 1
+fi
+
+# Checks for SETGID variable
+if [ -z "$SETGID" ]; then
+  echo >&2 'Please set a SETGID variable (ie.: -e SETGID=1009).'
+  exit 1
+fi
+
 echo "Creating user ${USER}"
-adduser -D ${USER}
+adduser -D --uid ${SETUID} --gid ${SETGID} ${USER}
 echo "${USER}:${PASSWORD}" | chpasswd
 echo "Fixing permissions for user ${USER}"
-chown -R ${USER}:${USER} /home/${USER}
+chown -R ${SETUID}:${SETGID} /home/${USER}
 exec "$@"
